@@ -1,3 +1,5 @@
+package com.kbr.homework.homework5;
+
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Objects;
@@ -81,10 +83,10 @@ public class HomeWork5 {
 
     public static void main(String[] args) {
           // Задание 1
-//        final int N = 10;
-//        String[] arr = new String[N];
-//        fillArrayUniqueValue(arr);
-//        System.out.println(Arrays.toString(arr));
+        final int N = 10;
+        String[] arr = new String[N];
+        fillArrayUniqueValue(arr);
+        System.out.println(Arrays.toString(arr));
 
 //        // Задание 2
 //        System.out.println("Количесвто вхождений в стрку: " + quantityOfEntry("дом домик домой одомашненный", "дом" ));

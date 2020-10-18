@@ -4,30 +4,30 @@ import java.time.LocalTime;
 import java.util.Objects;
 
 public class FitnesClub {
-    Zone gym = new Zone(InfoMesage.GYM);
-    Zone pool = new Zone(InfoMesage.POOL);
-    Zone group = new Zone(InfoMesage.GROUP);
+    Zone gym = new Zone(InfoMessage.GYM);
+    Zone pool = new Zone(InfoMessage.POOL);
+    Zone group = new Zone(InfoMessage.GROUP);
 
 
     public void addAbonement(Abonement abonement) {
         abonement.fixCurrentDate();
         if (isNoValidTime(abonement)) {
-            System.out.println(abonement.getClient().getName() + " " + InfoMesage.NO_TIME);
+            System.out.println(abonement.getClient().getName() + " " + InfoMessage.NO_TIME);
             return;
         }
         if (isNoValidZone(abonement)) {
-            System.out.println(abonement.getClient().getName() + " " + InfoMesage.NO_VALID_ACCESS);
+            System.out.println(abonement.getClient().getName() + " " + InfoMessage.NO_VALID_ACCESS);
             return;
         }
-        if (abonement.getClient().getPreference().equalsIgnoreCase(InfoMesage.GYM)) {
-            gym.addAbonement(abonement);
+        if (abonement.getClient().getPreference().equalsIgnoreCase(InfoMessage.GYM)) {
             detectClient(abonement, gym);
-        } else if (abonement.getClient().getPreference().equalsIgnoreCase(InfoMesage.GROUP)) {
-            group.addAbonement(abonement);
+            gym.addAbonement(abonement);
+        } else if (abonement.getClient().getPreference().equalsIgnoreCase(InfoMessage.GROUP)) {
             detectClient(abonement, group);
-        } else if (abonement.getClient().getPreference().equalsIgnoreCase(InfoMesage.POOL)) {
-            pool.addAbonement(abonement);
+            group.addAbonement(abonement);
+        } else if (abonement.getClient().getPreference().equalsIgnoreCase(InfoMessage.POOL)) {
             detectClient(abonement, pool);
+            pool.addAbonement(abonement);
         }
     }
 
@@ -42,9 +42,9 @@ public class FitnesClub {
 
 
     private boolean isNoValidZone(Abonement abonement) {
-        if (abonement.getAccess() == Access.EVENING && abonement.getClient().getPreference().equalsIgnoreCase(InfoMesage.POOL)) {
+        if (abonement.getAccess() == Access.EVENING && abonement.getClient().getPreference().equalsIgnoreCase(InfoMessage.POOL)) {
             return true;
-        } else if (abonement.getAccess() == Access.ONE_TIME && abonement.getClient().getPreference().equalsIgnoreCase(InfoMesage.GROUP)) {
+        } else if (abonement.getAccess() == Access.ONE_TIME && abonement.getClient().getPreference().equalsIgnoreCase(InfoMessage.GROUP)) {
             return true;
         }
         return false;
@@ -54,7 +54,7 @@ public class FitnesClub {
         group.closeZone();
         gym.closeZone();
         pool.closeZone();
-        System.out.println(InfoMesage.CLOSE);
+        System.out.println(InfoMessage.CLOSE);
     }
 
 
@@ -71,7 +71,7 @@ public class FitnesClub {
     }
 
     public void detectClient(Abonement abonement, Zone zone) {
-        System.out.println(InfoMesage.FIX_CLIENT);
+        System.out.println(InfoMessage.FIX_CLIENT);
         System.out.println("   Фамилия: " + abonement.getClient().getSurName()
                 + "\n   Имя: " + abonement.getClient().getName()
                 + "\n   Дата посещения фитнесс зала: " + abonement.getCurrentDate()

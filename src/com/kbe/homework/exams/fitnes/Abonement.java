@@ -2,7 +2,7 @@ package com.kbe.homework.exams.fitnes;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.Month;
+import java.util.Objects;
 
 public class Abonement {
     private LocalTime dateStart;
@@ -13,7 +13,7 @@ public class Abonement {
 
 
     public Abonement(Client client, LocalTime startTime, LocalTime endTime, Access access) {
-        this.client = client;
+        setClient(client);
         this.dateStart = startTime;
         this.dateEnd = endTime;
         this.access = access;
@@ -47,6 +47,13 @@ public class Abonement {
 
     public void setAccess(Access access) {
         this.access = access;
+    }
+
+
+    public void setClient(Client client) {
+        if (Objects.isNull(client))
+            throw new IllegalArgumentException(InfoMessage.OBJECT_IS_NULL);
+        this.client = client;
     }
 
 

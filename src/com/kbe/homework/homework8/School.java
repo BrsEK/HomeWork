@@ -1,4 +1,4 @@
-package com.kbr.homework.homework8;
+package com.kbe.homework.homework8;
 
 import java.util.Arrays;
 import java.util.Objects;

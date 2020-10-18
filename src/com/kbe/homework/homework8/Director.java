@@ -1,4 +1,4 @@
-package com.kbr.homework.homework8;
+package com.kbe.homework.homework8;
 
 public class Director extends Human implements AbleStudy{
     private int qualification;

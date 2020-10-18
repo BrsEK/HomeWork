@@ -1,4 +1,4 @@
-package com.kbr.homework.homework8;
+package com.kbe.homework.homework8;
 
 public class Teacher extends Human implements AbleTeach {
     private String subjectTaught;

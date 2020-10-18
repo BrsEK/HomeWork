@@ -1,4 +1,4 @@
-package com.kbr.homework.homework6;
+package com.kbe.homework.homework6;
 
 public class NutritionalValue {
     private String nameOfProduct;

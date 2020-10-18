@@ -1,4 +1,4 @@
-package com.kbr.homework.homework5;
+package com.kbe.homework.homework5;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;

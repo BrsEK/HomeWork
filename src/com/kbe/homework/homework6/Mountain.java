@@ -1,4 +1,4 @@
-package com.kbr.homework.homework6;
+package com.kbe.homework.homework6;
 
 public class Mountain {
     private String name;

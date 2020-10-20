@@ -1,9 +1,29 @@
 package com.kbe.homework.exams.fitnes;
 
+import java.util.Objects;
+
 public class Client {
     private String name;
     private String surName;
     private String preference;
+
+    public void setName(String name) {
+        if (Objects.isNull(name))
+            throw new IllegalArgumentException(InfoMessage.OBJECT_IS_NULL);
+        this.name = name.trim();
+    }
+
+    public void setSurName(String surName) {
+        if (Objects.isNull(name))
+            throw new IllegalArgumentException(InfoMessage.OBJECT_IS_NULL);
+        this.surName = surName.trim();
+    }
+
+    public void setPreference(String preference) {
+        if (Objects.isNull(name))
+            throw new IllegalArgumentException(InfoMessage.OBJECT_IS_NULL);
+        this.preference = preference.trim();
+    }
 
 
     public Client(String name, String surName, String preference) {

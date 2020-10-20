@@ -4,8 +4,8 @@ import java.time.LocalTime;
 
 public class Main {
     public static void main(String[] args) {
-        Client ivan = new Client("Иван","Иванов", InfoMessage.GROUP);
-        Client oleg = new Client("Олег","Сидоров", InfoMessage.GROUP);
+        Client ivan = new Client("Иван","Иванов", InfoMessage.POOL);
+        Client oleg = new Client("Олег","Сидоров", InfoMessage.GYM);
         Client alex = new Client("Александр","Петров", InfoMessage.GYM);
 
         FitnesClub fitnesClub = new FitnesClub();
@@ -18,6 +18,7 @@ public class Main {
         fitnesClub.addAbonement(abonementEvening);
         fitnesClub.addAbonement(abonementFull);
 
+        fitnesClub.printInfoAboutClients();
 
     }
 }

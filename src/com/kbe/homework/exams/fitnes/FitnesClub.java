@@ -4,9 +4,14 @@ import java.time.LocalTime;
 import java.util.Objects;
 
 public class FitnesClub {
-    Zone gym = new Zone(InfoMessage.GYM);
-    Zone pool = new Zone(InfoMessage.POOL);
-    Zone group = new Zone(InfoMessage.GROUP);
+    //    Zone gym = new Zone(InfoMessage.GYM);
+    //    Zone pool = new Zone(InfoMessage.POOL);
+    //    Zone group = new Zone(InfoMessage.GROUP);
+    private Zone[] zones = new Zone[]{
+            new Zone(InfoMessage.GYM),
+            new Zone(InfoMessage.POOL),
+            new Zone(InfoMessage.GROUP
+    )};
 
 
     public void addAbonement(Abonement abonement) {
@@ -19,15 +24,19 @@ public class FitnesClub {
             System.out.println(abonement.getClient().getName() + " " + InfoMessage.NO_VALID_ACCESS);
             return;
         }
-        if (abonement.getClient().getPreference().equalsIgnoreCase(InfoMessage.GYM)) {
-            detectClient(abonement, gym);
-            gym.addAbonement(abonement);
-        } else if (abonement.getClient().getPreference().equalsIgnoreCase(InfoMessage.GROUP)) {
-            detectClient(abonement, group);
-            group.addAbonement(abonement);
-        } else if (abonement.getClient().getPreference().equalsIgnoreCase(InfoMessage.POOL)) {
-            detectClient(abonement, pool);
-            pool.addAbonement(abonement);
+        if (isDoubleAdd(abonement))
+            return;
+        for (Zone zone : zones) {
+            if (abonement.getClient().getPreference().equalsIgnoreCase(InfoMessage.GYM) && zone.getNameOfZone().equalsIgnoreCase(InfoMessage.GYM)) {
+                detectClient(abonement, zone);
+                zone.addAbonement(abonement);
+            } else if (abonement.getClient().getPreference().equalsIgnoreCase(InfoMessage.GROUP) && zone.getNameOfZone().equalsIgnoreCase(InfoMessage.GROUP)) {
+                detectClient(abonement, zone);
+                zone.addAbonement(abonement);
+            } else if (abonement.getClient().getPreference().equalsIgnoreCase(InfoMessage.POOL) && zone.getNameOfZone().equalsIgnoreCase(InfoMessage.POOL)) {
+                detectClient(abonement, zone);
+                zone.addAbonement(abonement);
+            }
         }
     }
 
@@ -51,10 +60,10 @@ public class FitnesClub {
     }
 
     public void closeFitnessClub() {
-        group.closeZone();
-        gym.closeZone();
-        pool.closeZone();
-        System.out.println(InfoMessage.CLOSE);
+//        group.closeZone();
+//        gym.closeZone();
+//        pool.closeZone();
+//        System.out.println(InfoMessage.CLOSE);
     }
 
 
@@ -65,9 +74,9 @@ public class FitnesClub {
 
 
     public void printInfoAboutClients() {
-        printClientsZone(gym);
-        printClientsZone(pool);
-        printClientsZone(group);
+        printClientsZone(zones[0]);
+        printClientsZone(zones[1]);
+        printClientsZone(zones[2]);
     }
 
     public void detectClient(Abonement abonement, Zone zone) {
@@ -78,6 +87,19 @@ public class FitnesClub {
                 + "\n   Зона: " + zone.getNameOfZone());
     }
 
+    private boolean isDoubleAdd(Abonement abonement){
+        int countClients = 0;
+        for (int i = 0; i < zones.length; i++) {
+            for (int j = 0; j < zones[i].getAbonements().length; j++) {
+                if (abonement.equals(zones[i].getAbonements()[j])){
+                    countClients++;
+                }
+            }
+        }
+        if (countClients > 0)
+            return true;
+        else return false;
+    }
 
     private void printClientsZone(Zone zone) {
         for (int i = 0; i < zone.getAbonements().length; i++) {

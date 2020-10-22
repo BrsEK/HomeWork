@@ -1,6 +1,8 @@
 package com.kbe.homework.exams.fitnes;
 
+import java.lang.reflect.Array;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class FitnesClub {
@@ -64,6 +66,9 @@ public class FitnesClub {
 //        gym.closeZone();
 //        pool.closeZone();
 //        System.out.println(InfoMessage.CLOSE);
+        for (Zone zone : zones) {
+            zone.closeZone();
+        }
     }
 
 

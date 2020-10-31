@@ -91,19 +91,4 @@ class MessageGenerator {
 
         return messages;
     }
-
-    public static class CodeComparator implements Comparator<Message> {
-        @Override
-        public int compare(Message o1, Message o2) {
-            return Integer.compare(o1.getCode(), o2.getCode());
-        }
-    }
-
-    public static class PriorityComparator implements Comparator<Message>{
-
-        @Override
-        public int compare(Message o1, Message o2) {
-            return o1.getPriority().compareTo(o2.getPriority());
-        }
-    }
 }

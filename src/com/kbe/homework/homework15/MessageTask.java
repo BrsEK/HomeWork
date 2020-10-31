@@ -28,7 +28,6 @@ public class MessageTask {
                     break;
             }
         }
-        System.out.println();
         System.out.println("Quantity of message for: \n"
         + MessagePriority.LOW.toString() + " = " + quantityOfPriorityLow + "\n"
         + MessagePriority.MEDIUM.toString() + " = " + quantityOfPriorityMedium + "\n"
@@ -39,18 +38,29 @@ public class MessageTask {
     public static void countEachCode(List<Message> messageList) {
         // TODO: Подсчитать количество сообщений для каждого кода сообщения
         //  Ответ в консоль
+        ArrayList<Integer> codes = new ArrayList<>();
+        for (Message message : messageList) {
+            codes.add(message.getCode());
+        }
+        int[] countMessage = new int[codes.size()];
 
+
+        for (int i = 0; i < messageList.size(); i++) {
+            int count = 1;
+            for (int j = 0; j < codes.size(); j++) {
+                if (messageList.get(i).getCode() == codes.get(j))
+                    countMessage[i] = count++;
+            }
+        }
+        System.out.print(codes + "   <------- Codes");
+        System.out.println();
+        System.out.println(Arrays.toString(countMessage) + "   <--------- messages");
     }
 
     private static void uniqueMessageCount(List<Message> messageList) {
         // TODO: Подсчитать количество уникальных сообщений
         //  Ответ в консоль
-        System.out.println();
-        Comparator<Message> comparatorMessage = new MessageGenerator.PriorityComparator().thenComparing(new MessageGenerator.CodeComparator());
-        Set<Message> uniqueMessages = new TreeSet<>(comparatorMessage);
-        for (Message message : messageList) {
-            uniqueMessages.add(message);
-        }
+        HashSet<Message> uniqueMessages = new HashSet<>(messageList);
         System.out.print("Unique messages: ");
         System.out.println(uniqueMessages.size());
     }
@@ -60,14 +70,14 @@ public class MessageTask {
         //  в котором они встретились в первоначальном списке
         //  Например, было: [{URGENT, 4}, {HIGH, 9}, {LOW, 3}, {HIGH, 9}]
         //  на выходе: [{URGENT, 4}, {HIGH, 9}, {LOW, 3}]
-
-        return messageList;
+        LinkedHashSet<Message> uniqueSet = new LinkedHashSet<>(messageList);
+        List<Message> copyList = new ArrayList<>(uniqueSet);
+        return copyList;
     }
 
     public static void removeEach(List<Message> messageList, MessagePriority priority){
         // TODO: удалить из коллекции каждое сообщение с заданным приоритетом
         //  вывод в консоль до удаления и после удаления
-        System.out.println();
         System.out.println("До удаления:");
         System.out.println(messageList);
         Iterator<Message> iterator = messageList.iterator();
@@ -82,7 +92,6 @@ public class MessageTask {
     public static void removeOther(List<Message> messageList, MessagePriority priority){
         // TODO: удалить из коллекции все сообщения, кроме тех, которые имеют заданный приоритет
         //  вывод в консоль до удаления и после удаления
-        System.out.println();
         System.out.println("До удаления:");
         System.out.println(messageList);
         Iterator<Message> iterator = messageList.iterator();
@@ -98,12 +107,24 @@ public class MessageTask {
     public static void main(String[] args) {
         ArrayList<Message> messages = new ArrayList<>(MessageGenerator.generate(20));
         System.out.println(messages);
+        System.out.println("============= Работа метода countEachPriority =============");
         countEachPriority(messages);
-
+        System.out.println();
+        System.out.println("============= Работа метода countEachCode =============");
+        countEachCode(messages);
+        System.out.println();
+        System.out.println("============= Работа метода uniqueMessageCount =============");
         uniqueMessageCount(messages);
+        System.out.println();
+        System.out.println("============= Работа метода uniqueMessagesInOriginalOrder =============");
+        System.out.println(messages);
+        System.out.println(uniqueMessagesInOriginalOrder(messages));
+        System.out.println();
+        System.out.println("============= Работа метода removeEach =============");
         removeEach(messages, MessagePriority.HIGH);
-        //removeOther(messages, MessagePriority.HIGH);
-
-
+        System.out.println();
+        System.out.println("============= Работа метода removeOther =============");
+        removeOther(messages, MessagePriority.MEDIUM);
+        System.out.println();
     }
 }

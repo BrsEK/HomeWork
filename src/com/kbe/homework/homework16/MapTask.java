@@ -1,6 +1,5 @@
 package com.kbe.homework.homework16;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class MapTask {
@@ -17,11 +16,11 @@ public class MapTask {
 
         String city = "Тверь";
 
-        List<String> listOfCities = new ArrayList<>();
-        listOfCities = getListOfCities(firstTaskMap, city);
+        List<String> loginsOfCity = new ArrayList<>();
+        loginsOfCity = getLoginsOfCity(firstTaskMap, city);
 
         System.out.print("Логины соответствующие городу " + city + ": ");
-        System.out.println(listOfCities);
+        System.out.println(loginsOfCity);
 
 
         // TODO:: дан список слов (words).
@@ -41,7 +40,7 @@ public class MapTask {
         words.add("august");
         words.add("august");
 
-        System.out.println("Список повторений: " + getLoginsOfCity(words));
+        System.out.println("Список повторений: " + getRepetitions(words));
 
 
         // TODO:: дана мапа (customerMap).
@@ -84,7 +83,7 @@ public class MapTask {
     }
 
 
-    private static Map<String, Integer> getLoginsOfCity(List<String> words) {
+    private static Map<String, Integer> getRepetitions(List<String> words) {
         Map<String, Integer> mapSameWords = new HashMap<>();
         for (String word : words) {
             if (mapSameWords.containsKey(word)) {
@@ -97,7 +96,7 @@ public class MapTask {
     }
 
 
-    private static List<String> getListOfCities(HashMap<String, String> firstTaskMap, String city) {
+    private static List<String> getLoginsOfCity(HashMap<String, String> firstTaskMap, String city) {
         List<String> listOfCities = new ArrayList<>();
         for (Map.Entry<String, String> citySet : firstTaskMap.entrySet()) {
             if (citySet.getValue().equalsIgnoreCase(city))

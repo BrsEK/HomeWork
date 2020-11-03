@@ -154,7 +154,6 @@ public class MapTask {
 
     private static void printFrequencyEnglishWords(String text) {
         String textWithoutSpace = text.replaceAll("\\W", "");
-        List<String> textArray = Arrays.asList(textWithoutSpace);
         HashMap<Character, Integer> infoMap = new HashMap<>();
         int quantityOfCharacter = textWithoutSpace.length();
         char[] chars = textWithoutSpace.toUpperCase().toCharArray();
@@ -166,8 +165,8 @@ public class MapTask {
             }
         }
         for (Map.Entry<Character, Integer> characterIntegerEntry : infoMap.entrySet()) {
-            int percent = (characterIntegerEntry.getValue() / quantityOfCharacter) * 100;
-            System.out.println(characterIntegerEntry.getKey() + " " + characterIntegerEntry.getValue() + " %");
+            float percent = ((float)characterIntegerEntry.getValue() / quantityOfCharacter) * 100;
+            System.out.println(characterIntegerEntry.getKey() + " " + percent + " %");
         }
     }
 }

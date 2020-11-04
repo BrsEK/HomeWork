@@ -148,7 +148,12 @@ public class MapTask {
 
             sortedWord.put(Collections.frequency(textList, word), word);
         }
-        System.out.println(sortedWord);
+        System.out.println("----- Top Words -----");
+        int count = sortedWord.size();
+        for (Map.Entry<Integer, String> entry : sortedWord.entrySet()) {
+            System.out.println(count + " место :" + entry.getValue());
+            count--;
+        }
     }
 
 

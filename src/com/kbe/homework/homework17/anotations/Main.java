@@ -20,6 +20,7 @@ public class Main {
         }
         System.out.println(human);
 
+
         // 2.2 ---------------------------
         try {
             ExampleAnnotation.setNameUsingReflection("Boris", human);
@@ -32,6 +33,7 @@ public class Main {
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }
+
 
         //2.3 ---------------------------
         System.out.println(human);

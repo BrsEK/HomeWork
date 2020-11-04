@@ -151,7 +151,7 @@ public class MapTask {
         System.out.println("----- Top Words -----");
         int count = sortedWord.size();
         for (Map.Entry<Integer, String> entry : sortedWord.entrySet()) {
-            System.out.println(count + " место :" + entry.getValue());
+            System.out.println(count + " место: " + entry.getValue());
             count--;
         }
     }

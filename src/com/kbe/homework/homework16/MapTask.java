@@ -4,7 +4,7 @@ import java.util.*;
 
 public class MapTask {
     public static void main(String[] args) {
-        // TODO:: написать статический метод, который приннимает на вход мапу (firstTaskMap) и город (city)
+        // TODO:: написать статический метод, который принимает на вход мапу (firstTaskMap) и город (city)
         //  и формирует список (List) логинов, которые соответствуют переданному городу
 
         HashMap<String, String> firstTaskMap = new HashMap<>();
@@ -85,13 +85,17 @@ public class MapTask {
 
     private static Map<String, Integer> getRepetitions(List<String> words) {
         Map<String, Integer> mapSameWords = new HashMap<>();
+//        for (String word : words) {
+//            if (mapSameWords.containsKey(word)) {
+//                mapSameWords.put(word, mapSameWords.get(word) + 1);
+//            } else {
+//                mapSameWords.put(word, +1);
+//            }
+//        }
         for (String word : words) {
-            if (mapSameWords.containsKey(word)) {
-                mapSameWords.put(word, mapSameWords.get(word) + 1);
-            } else {
-                mapSameWords.put(word, +1);
-            }
+            mapSameWords.put(word, mapSameWords.getOrDefault(word, 0) + 1);
         }
+
         return mapSameWords;
     }
 
@@ -128,7 +132,7 @@ public class MapTask {
 
     private static HashMap<Integer, HashSet<String>> groupWordsByRepetitions(String text) {
         HashMap<Integer, HashSet<String>> groupWords = new HashMap<>();
-        ArrayList<String> words = new ArrayList<>(Arrays.asList(text.split("\\W")));
+        ArrayList<String> words = new ArrayList<>(Arrays.asList(text.toLowerCase().split("\\W")));
         for (String word : words) {
             if (groupWords.containsKey(word.length())) {
                 groupWords.get(word.length()).add(word);
@@ -136,23 +140,32 @@ public class MapTask {
                 groupWords.put(word.length(), new HashSet<>());
                 groupWords.get(word.length()).add(word);
             }
+
         }
         return groupWords;
     }
 
 
     private static void printTopFrequencyWords(String text) {
-        List<String> textList = Arrays.asList(text.split("\\W"));
-        TreeMap<Integer, String> sortedWord = new TreeMap<>();
+        List<String> textList = Arrays.asList(text.toLowerCase().split("\\W"));
+        HashMap<String, Integer> wordAndRepetition = new HashMap<>();
         for (String word : textList) {
-
-            sortedWord.put(Collections.frequency(textList, word), word);
+            //sortedWord.put(word, Collections.frequency(textList, word));
+            wordAndRepetition.put(word, wordAndRepetition.getOrDefault(word, 0) + 1);
         }
+        TreeSet<Map.Entry<String, Integer>> treeEntre = new TreeSet<>(new EntryComparator());
+        treeEntre.addAll(wordAndRepetition.entrySet());
         System.out.println("----- Top Words -----");
-        int count = sortedWord.size();
-        for (Map.Entry<Integer, String> entry : sortedWord.entrySet()) {
-            System.out.println(count + " место: " + entry.getValue());
-            count--;
+        System.out.println(treeEntre);
+    }
+
+
+    static class EntryComparator implements Comparator<Map.Entry<String, Integer>> {
+
+        @Override
+        public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+            if (Integer.compare(o1.getValue(), o2.getValue()) == 0) return -1;
+            return Integer.compare(o1.getValue(), o2.getValue());
         }
     }
 
@@ -170,7 +183,7 @@ public class MapTask {
             }
         }
         for (Map.Entry<Character, Integer> characterIntegerEntry : infoMap.entrySet()) {
-            float percent = ((float)characterIntegerEntry.getValue() / quantityOfCharacter) * 100;
+            float percent = ((float) characterIntegerEntry.getValue() / quantityOfCharacter) * 100;
             System.out.println(characterIntegerEntry.getKey() + " " + percent + " %");
         }
     }

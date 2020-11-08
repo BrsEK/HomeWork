@@ -1,37 +1,49 @@
 package com.kbe.homework.homework17.reflection;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.util.Objects;
 
 public class ExampleReflection {
 
+    public static String toString(Object o) throws IllegalAccessException {
+        Objects.requireNonNull(o, "Object is not be null");
 
-    public static String toString(Object o){
-        Class<? extends Object>someClass = o.getClass();
+        Class<? extends Object> someClass = o.getClass();
 
-        StringBuilder stingBuilderInfo = new StringBuilder();
+        StringBuilder stringBuilderInfo = new StringBuilder();
 
-        for (Field field : someClass.getDeclaredFields()) {
-            field.setAccessible(true);
-            stingBuilderInfo.append(makeColorString("Field -----------------------"));
-            stingBuilderInfo.append("\n");
-            stingBuilderInfo.append(" ");
-            stingBuilderInfo.append(field.getName());
-            stingBuilderInfo.append(" - ");
-            try {
-                stingBuilderInfo.append(field.get(o));
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
+        if (someClass.isArray()) {
+            stringBuilderInfo.append("{ ");
+            for (int i = 0; i < Array.getLength(o); i++) {
+                stringBuilderInfo.append(Array.get(o, i));
+                stringBuilderInfo.append(", ");
             }
-            stingBuilderInfo.append("\n");
+            stringBuilderInfo.append("}");
+            return stringBuilderInfo.toString();
         }
 
-        return stingBuilderInfo.toString();
-    }
+        if (o instanceof String
+                || o instanceof Byte
+                || o instanceof Integer
+                || o instanceof Long
+                || o instanceof Double
+                || o instanceof Float
+                || o instanceof Boolean
+        ) {
+            return o.toString();
+        }
 
-
-    private static  String makeColorString(String str){
-        final String ANSI_RESET = "\u001B[0m";
-        final String ANSI_GREEN = "\u001B[32m";
-        return ANSI_GREEN + str + ANSI_RESET;
+        Field[] fields = o.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            field.setAccessible(true);
+            stringBuilderInfo
+                    .append(field.getName())
+                    .append(": ")
+                    .append(toString(field.get(o)))
+                    .append("\n");
+        }
+        return stringBuilderInfo.toString();
     }
 }
+

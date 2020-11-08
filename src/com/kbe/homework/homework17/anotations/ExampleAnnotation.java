@@ -8,6 +8,7 @@ import java.lang.reflect.Method;
 public class ExampleAnnotation {
     public static Human createHumanUsingReflection(String name, int age) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         Class<? extends Human> humanClass = Human.class;
+
         if (humanClass.isAnnotationPresent(Config.class)) {
             Constructor<? extends Human> constructorHuman = humanClass
                     .getDeclaredConstructor(String.class, int.class);

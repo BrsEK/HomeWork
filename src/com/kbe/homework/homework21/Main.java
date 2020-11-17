@@ -73,7 +73,7 @@ public class Main {
         System.out.println("By month and price and name: ");
         courses4.forEach(System.out::println);
 
-        // Task 5 -----------
+        // Task 5 ------------
         university.getCourses().forEach(course -> course.setPrice(course.getPrice() + 10000));
     }
 }

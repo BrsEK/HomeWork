@@ -12,9 +12,6 @@ public class ComparingExample {
         Car yellowMazda = new Car("yellow", "mazda", 3000);
         Car greenMazda = new Car("green", "mazda", 3000);
 
-        Comparator<Car> priceComparator = new Car.PriceComparator();
-        Comparator<Car> brandComparator = new Car.BrandComparator();
-        Comparator<Car> colorComparator = new Car.ColorComparator();
 
         ArrayList<Car> cars = new ArrayList<>();
         cars.add(blackOpel);
@@ -22,13 +19,14 @@ public class ComparingExample {
         cars.add(yellowMazda);
         cars.add(greenMazda);
 
-        cars.sort(priceComparator);
+
+        cars.sort(Comparator.comparing(Car::getPrice));
         System.out.println(cars);
 
-        cars.sort(colorComparator);
+        cars.sort(Comparator.comparing(Car::getColor));
         System.out.println(cars);
 
-        cars.sort(brandComparator);
+        cars.sort(Comparator.comparing(Car::getBrand));
         System.out.println(cars);
     }
 }

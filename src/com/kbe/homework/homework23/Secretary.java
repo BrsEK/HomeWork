@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class PupilsSecretary {
+public class Secretary {
     private String name;
     private String surname;
 
-    public PupilsSecretary(String name, String surname) {
+    public Secretary(String name, String surname) {
         this.name = name;
         this.surname = surname;
     }

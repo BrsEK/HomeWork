@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class PupilTask {
     public static void main(String[] args) {
 
-        PupilsSecretary secretary = new PupilsSecretary("Egor", "Ivanovich");
+        Secretary secretary = new Secretary("Egor", "Ivanovich");
 
         // обращение к enum Gender через имя класса - Pupil.Gender
         ArrayList<Pupil> pupils = new ArrayList<>();

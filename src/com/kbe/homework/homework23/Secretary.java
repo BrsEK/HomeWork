@@ -1,10 +1,10 @@
 package com.kbe.homework.homework23;
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Secretary {
@@ -49,7 +49,11 @@ public class Secretary {
 
 
     public void printUniqueNamePupil(ArrayList<Pupil> pupils) {
-
+        pupils.stream()
+                .collect(Collectors.toMap(
+                        Pupil::getName,
+                        Pupil::getBirth
+                )).forEach((pupil, dateOfBirth) -> System.out.println(pupil + " - " + dateOfBirth));
     }
 
 
@@ -77,7 +81,11 @@ public class Secretary {
 
 
     public Map<Pupil.Gender, Integer> getPupilsSortedByAgeSum(ArrayList<Pupil> pupils) {
-        return null;//pupils.stream()
-        // .collect(Collectors.groupingBy(Pupil::getGender, Collectors.summingInt(pupil -> pupil.getBirth().getYear()))
+//        Map<Pupil.Gender, List<Pupil>>  map = pupils.stream()
+//                .collect(Collectors.groupingBy(
+//                        Pupil::getGender
+//                )).entrySet()
+//                .stream().collect();
+        return null;
     }
 }

@@ -1,0 +1,4 @@
+Java SE 14 introduces pattern matching for the instanceof operator;
+if the result of the instanceof operator is true, then the object being tested is automatically assigned to a variable that you previously declared.
+See Pattern Matching for the instanceof Operator.
+This release also introduces records, which are a new kind of type declaration that's ideal for "plain data carriers," classes that contain data not meant to be altered and only the most fundamental methods such as constructors and accessors. See Records.

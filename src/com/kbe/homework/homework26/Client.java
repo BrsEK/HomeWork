@@ -28,7 +28,6 @@ public class Client implements Runnable {
                 toOrders.put(order);
                 Order orderFrom = fromOrders.take();
                 System.out.println("Клиент " + name + " получил заказ номер " + order.getNumberOfOrder());
-                Thread.currentThread().interrupt();
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 e.printStackTrace();
